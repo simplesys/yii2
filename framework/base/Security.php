@@ -305,7 +305,7 @@ class Security extends Component
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
             $length = (int) $length;
         }
-        if (!is_integer($length) || $length < 0 || $length > 255 * $hashLength) {
+        if ($length < 0 || $length > 255 * $hashLength || !is_integer($length)) {
             throw new InvalidParamException('Invalid length');
         }
         $blocks = $length !== 0 ? ceil($length / $hashLength) : 1;
@@ -360,13 +360,13 @@ class Security extends Component
         if (is_string($iterations) && preg_match('{^\d{1,16}$}', $iterations)) {
             $iterations = (int) $iterations;
         }
-        if (!is_integer($iterations) || $iterations < 1) {
+        if ($iterations < 1 || !is_integer($iterations)) {
             throw new InvalidParamException('Invalid iterations');
         }
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
             $length = (int) $length;
         }
-        if (!is_integer($length) || $length < 0) {
+        if ($length < 0 || !is_integer($length)) {
             throw new InvalidParamException('Invalid length');
         }
         $hashLength = StringHelper::byteLength($test);
@@ -555,7 +555,7 @@ class Security extends Component
      */
     public function validatePassword($password, $hash)
     {
-        if (!is_string($password) || $password === '') {
+        if ($password === '' || !is_string($password)) {
             throw new InvalidParamException('Password must be a string and cannot be empty.');
         }
 

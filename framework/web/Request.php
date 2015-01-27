@@ -1247,7 +1247,7 @@ class Request extends \yii\base\Request
      */
     public function getCsrfToken($regenerate = false)
     {
-        if ($this->_csrfToken === null || $regenerate) {
+        if ($regenerate || $this->_csrfToken === null) {
             if ($regenerate || ($token = $this->loadCsrfToken()) === null) {
                 $token = $this->generateCsrfToken();
             }

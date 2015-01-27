@@ -113,7 +113,7 @@ class Controller extends \yii\base\Controller
 
         $missing = [];
         foreach ($method->getParameters() as $i => $param) {
-            if ($param->isArray() && isset($args[$i])) {
+            if (isset($args[$i]) && $param->isArray()) {
                 $args[$i] = preg_split('/\s*,\s*/', $args[$i]);
             }
             if (!isset($args[$i])) {

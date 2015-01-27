@@ -171,7 +171,7 @@ class ActiveDataProvider extends BaseDataProvider
     public function setSort($value)
     {
         parent::setSort($value);
-        if (($sort = $this->getSort()) !== false && empty($sort->attributes) && $this->query instanceof ActiveQueryInterface) {
+        if ($this->query instanceof ActiveQueryInterface && ($sort = $this->getSort()) !== false && empty($sort->attributes)) {
             /* @var $model Model */
             $model = new $this->query->modelClass;
             foreach ($model->attributes() as $attribute) {

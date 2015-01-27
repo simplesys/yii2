@@ -90,7 +90,7 @@ class ColumnSchema extends Object
         if ($value === '' && $this->type !== Schema::TYPE_TEXT && $this->type !== Schema::TYPE_STRING && $this->type !== Schema::TYPE_BINARY) {
             return null;
         }
-        if ($value === null || gettype($value) === $this->phpType || $value instanceof Expression) {
+        if ($value === null || $value instanceof Expression || gettype($value) === $this->phpType) {
             return $value;
         }
         switch ($this->phpType) {

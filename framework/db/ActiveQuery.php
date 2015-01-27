@@ -216,7 +216,7 @@ class ActiveQuery extends Query implements ActiveQueryInterface
         }
 
         $models = $this->createModels($rows);
-        if (!empty($this->join) && $this->indexBy === null) {
+        if ($this->indexBy === null && !empty($this->join)) {
             $models = $this->removeDuplicatedModels($models);
         }
         if (!empty($this->with)) {

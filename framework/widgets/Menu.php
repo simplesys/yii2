@@ -263,7 +263,7 @@ class Menu extends Widget
             $hasActiveChild = false;
             if (isset($item['items'])) {
                 $items[$i]['items'] = $this->normalizeItems($item['items'], $hasActiveChild);
-                if (empty($items[$i]['items']) && $this->hideEmptyItems) {
+                if ($this->hideEmptyItems && empty($items[$i]['items'])) {
                     unset($items[$i]['items']);
                     if (!isset($item['url'])) {
                         unset($items[$i]);
@@ -299,7 +299,7 @@ class Menu extends Widget
     {
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
             $route = $item['url'][0];
-            if ($route[0] !== '/' && Yii::$app->controller) {
+            if (Yii::$app->controller && $route[0] !== '/') {
                 $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
             }
             if (ltrim($route, '/') !== $this->route) {

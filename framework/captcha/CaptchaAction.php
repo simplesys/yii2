@@ -163,7 +163,7 @@ class CaptchaAction extends Action
         $session = Yii::$app->getSession();
         $session->open();
         $name = $this->getSessionKey();
-        if ($session[$name] === null || $regenerate) {
+        if ($regenerate || $session[$name] === null) {
             $session[$name] = $this->generateVerifyCode();
             $session[$name . 'count'] = 1;
         }

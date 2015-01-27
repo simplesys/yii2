@@ -166,7 +166,7 @@ class Pagination extends Object implements Linkable
      */
     public function getPage($recalculate = false)
     {
-        if ($this->_page === null || $recalculate) {
+        if ($recalculate || $this->_page === null) {
             $page = (int) $this->getQueryParam($this->pageParam, 1) - 1;
             $this->setPage($page, true);
         }
@@ -231,7 +231,7 @@ class Pagination extends Object implements Linkable
             $this->_pageSize = null;
         } else {
             $value = (int) $value;
-            if ($validatePageSize && count($this->pageSizeLimit) === 2 && isset($this->pageSizeLimit[0], $this->pageSizeLimit[1])) {
+            if ($validatePageSize && isset($this->pageSizeLimit[0], $this->pageSizeLimit[1]) && count($this->pageSizeLimit) === 2) {
                 if ($value < $this->pageSizeLimit[0]) {
                     $value = $this->pageSizeLimit[0];
                 } elseif ($value > $this->pageSizeLimit[1]) {

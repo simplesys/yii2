@@ -162,7 +162,7 @@ class SluggableBehavior extends AttributeBehavior
             $slug = parent::getValue($event);
         }
 
-        if ($this->ensureUnique && $isNewSlug) {
+        if ($isNewSlug && $this->ensureUnique) {
             $baseSlug = $slug;
             $iteration = 0;
             while (!$this->validateSlug($slug)) {

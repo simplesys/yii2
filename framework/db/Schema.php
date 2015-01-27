@@ -201,7 +201,7 @@ abstract class Schema extends Object
      */
     public function getTableNames($schema = '', $refresh = false)
     {
-        if (!isset($this->_tableNames[$schema]) || $refresh) {
+        if ($refresh || !isset($this->_tableNames[$schema])) {
             $this->_tableNames[$schema] = $this->findTableNames($schema);
         }
 
@@ -250,7 +250,7 @@ abstract class Schema extends Object
     {
         /* @var $cache Cache */
         $cache = is_string($this->db->schemaCache) ? Yii::$app->get($this->db->schemaCache, false) : $this->db->schemaCache;
-        if ($this->db->enableSchemaCache && $cache instanceof Cache) {
+        if ($cache instanceof Cache && $this->db->enableSchemaCache) {
             TagDependency::invalidate($cache, $this->getCacheTag());
         }
         $this->_tableNames = [];

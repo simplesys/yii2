@@ -189,7 +189,7 @@ class QueryBuilder extends \yii\base\Object
         foreach ($rows as $row) {
             $vs = [];
             foreach ($row as $i => $value) {
-                if (!is_array($value) && isset($columns[$i]) && isset($columnSchemas[$columns[$i]])) {
+                if (isset($columns[$i], $columnSchemas[$columns[$i]]) && !is_array($value)) {
                     $value = $columnSchemas[$columns[$i]]->dbTypecast($value);
                 }
                 if (is_string($value)) {
@@ -675,7 +675,7 @@ class QueryBuilder extends \yii\base\Object
         }
 
         foreach ($joins as $i => $join) {
-            if (!is_array($join) || !isset($join[0], $join[1])) {
+            if (!isset($join[0], $join[1])) {
                 throw new Exception('A join clause must be specified as an array of join type, join table, and optionally join condition.');
             }
             // 0:join type, 1:join table, 2:on-condition (optional)
