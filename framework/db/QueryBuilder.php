@@ -1195,9 +1195,7 @@ class QueryBuilder extends \yii\base\Object
 
         list($column, $values) = $operands;
 
-        if (!is_array($values)) {
-            $values = [$values];
-        }
+        $values = (array)$values;
 
         if (empty($values)) {
             return $not ? '' : '0=1';
