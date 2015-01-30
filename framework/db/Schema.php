@@ -250,7 +250,7 @@ abstract class Schema extends Object
     {
         /* @var $cache Cache */
         $cache = is_string($this->db->schemaCache) ? Yii::$app->get($this->db->schemaCache, false) : $this->db->schemaCache;
-        if ($cache instanceof Cache && $this->db->enableSchemaCache) {
+        if ($this->db->enableSchemaCache && $cache instanceof Cache) {
             TagDependency::invalidate($cache, $this->getCacheTag());
         }
         $this->_tableNames = [];

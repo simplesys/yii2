@@ -171,7 +171,7 @@ class User extends Component
     public function getIdentity($autoRenew = true)
     {
         if ($this->_identity === false) {
-            if ($autoRenew && $this->enableSession) {
+            if ($this->enableSession && $autoRenew) {
                 $this->_identity = null;
                 $this->renewAuthStatus();
             } else {
@@ -285,7 +285,7 @@ class User extends Component
         }
 
         $data = json_decode($value, true);
-        if (!isset($data[0], $data[1], $data[2]) || count($data) !== 3) {
+        if (count($data) !== 3 || !isset($data[0], $data[1], $data[2])) {
             return;
         }
 
