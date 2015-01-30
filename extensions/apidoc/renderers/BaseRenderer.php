@@ -65,7 +65,9 @@ abstract class BaseRenderer extends Component
      */
     public function createTypeLink($types, $context = null, $title = null, $options = [])
     {
-        $types = (array)$types;
+        if (!is_array($types)) {
+            $types = [$types];
+        }
         if (count($types) > 1) {
             $title = null;
         }
