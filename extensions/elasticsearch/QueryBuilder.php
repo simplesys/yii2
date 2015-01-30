@@ -214,7 +214,7 @@ class QueryBuilder extends \yii\base\Object
                 if ($value === null) { // there is no null pk
                     $parts[] = ['terms' => ['_uid' => []]]; // this condition is equal to WHERE false
                 } else {
-                    $parts[] = ['ids' => ['values' => (array)$value]];
+                    $parts[] = ['ids' => ['values' => is_array($value) ? $value : [$value]]];
                 }
             } else {
                 if (is_array($value)) { // IN condition

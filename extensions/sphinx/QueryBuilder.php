@@ -928,7 +928,9 @@ class QueryBuilder extends Object
 
         list($column, $values) = $operands;
 
-        $values = (array)$values;
+        if (!is_array($values)) {
+            $values = [$values];
+        }
 
         if (empty($values)) {
             return $operator === 'LIKE' || $operator === 'OR LIKE' ? '0=1' : '';

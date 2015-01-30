@@ -411,7 +411,7 @@ class BaseArrayHelper
      */
     public static function multisort(&$array, $key, $direction = SORT_ASC, $sortFlag = SORT_REGULAR)
     {
-        $keys = (array)$key;
+        $keys = is_array($key) ? $key : [$key];
         if (empty($keys) || empty($array)) {
             return;
         }

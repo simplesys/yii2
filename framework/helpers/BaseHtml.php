@@ -1072,7 +1072,10 @@ class BaseHtml
         unset($options['header'], $options['footer'], $options['encode']);
 
         $lines = [];
-        foreach ((array)$models as $model) {
+        if (!is_array($models)) {
+            $models = [$models];
+        }
+        foreach ($models as $model) {
             /* @var $model Model */
             foreach ($model->getFirstErrors() as $error) {
                 $lines[] = $encode ? Html::encode($error) : $error;
