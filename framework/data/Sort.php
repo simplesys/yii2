@@ -234,7 +234,7 @@ class Sort extends Object
      */
     public function getAttributeOrders($recalculate = false)
     {
-        if ($recalculate || $this->_attributeOrders === null) {
+        if ($this->_attributeOrders === null || $recalculate) {
             $this->_attributeOrders = [];
             if (($params = $this->params) === null) {
                 $request = Yii::$app->getRequest();

@@ -201,7 +201,7 @@ abstract class Schema extends Object
      */
     public function getTableNames($schema = '', $refresh = false)
     {
-        if ($refresh || !isset($this->_tableNames[$schema])) {
+        if (!isset($this->_tableNames[$schema]) || $refresh) {
             $this->_tableNames[$schema] = $this->findTableNames($schema);
         }
 
