@@ -263,7 +263,7 @@ class Menu extends Widget
             $hasActiveChild = false;
             if (isset($item['items'])) {
                 $items[$i]['items'] = $this->normalizeItems($item['items'], $hasActiveChild);
-                if ($this->hideEmptyItems && empty($items[$i]['items'])) {
+                if (empty($items[$i]['items']) && $this->hideEmptyItems) {
                     unset($items[$i]['items']);
                     if (!isset($item['url'])) {
                         unset($items[$i]);
