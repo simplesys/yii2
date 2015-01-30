@@ -675,7 +675,7 @@ class QueryBuilder extends \yii\base\Object
         }
 
         foreach ($joins as $i => $join) {
-            if (!isset($join[0], $join[1])) {
+            if (!is_array($join) || !isset($join[0], $join[1])) {
                 throw new Exception('A join clause must be specified as an array of join type, join table, and optionally join condition.');
             }
             // 0:join type, 1:join table, 2:on-condition (optional)

@@ -305,7 +305,7 @@ class Security extends Component
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
             $length = (int) $length;
         }
-        if (!is_integer($length) || $length < 0) {
+        if (!is_integer($length) || $length < 0 || $length > 255 * $hashLength) {
             throw new InvalidParamException('Invalid length');
         }
         $blocks = $length !== 0 ? ceil($length / $hashLength) : 1;
@@ -366,7 +366,7 @@ class Security extends Component
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
             $length = (int) $length;
         }
-        if (!is_integer($length) || $length < 0 || $length > 255 * $hashLength) {
+        if (!is_integer($length) || $length < 0) {
             throw new InvalidParamException('Invalid length');
         }
         $hashLength = StringHelper::byteLength($test);
